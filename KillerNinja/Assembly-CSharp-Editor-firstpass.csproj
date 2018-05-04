@@ -60,14 +60,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Standard Assets\Editor\CrossPlatformInput\CrossPlatformInputInitialize.cs" />
+    <Reference Include="Xiaomi">
+      <HintPath>C:/Users/diego/Documents/GitHub/KillerNinja/KillerNinja/Library/ScriptAssemblies/Xiaomi.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/diego/Documents/GitHub/KillerNinja/KillerNinja/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
       <HintPath>C:/Users/diego/Documents/GitHub/KillerNinja/KillerNinja/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Xiaomi">
-      <HintPath>C:/Users/diego/Documents/GitHub/KillerNinja/KillerNinja/Library/ScriptAssemblies/Xiaomi.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>E:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -330,14 +330,14 @@
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/Users/diego/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
     </Reference>
-    <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
-      <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
-    </Reference>
     <Reference Include="ChannelPurchase">
       <HintPath>C:/Users/diego/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.xiaomi@1.0.2/ChannelPurchase.dll</HintPath>
     </Reference>
     <Reference Include="UnityStore">
       <HintPath>C:/Users/diego/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.xiaomi@1.0.2/UnityStore.dll</HintPath>
+    </Reference>
+    <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
+      <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>E:/Unity/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/mscorlib.dll</HintPath>
