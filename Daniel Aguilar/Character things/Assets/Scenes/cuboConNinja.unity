@@ -209,8 +209,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c40b0d157c3af964da186d116ae2dcac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
-  jumpHigh: 3
+  moveSpeed: 1
+  jumpHigh: 10
 --- !u!54 &293045576
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -368,7 +368,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 790588118}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.9, z: -18.31}
+  m_LocalPosition: {x: 0, y: 2.38, z: -4.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
