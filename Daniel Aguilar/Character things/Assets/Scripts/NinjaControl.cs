@@ -6,7 +6,7 @@ public class NinjaControl : MonoBehaviour {
 
     public float moveSpeed { get; set; }
     public float jumpHigh { get; set; }
-    public Object shuriken = Resources.Load("shuriken");
+    public Object shuriken;
     private Vector2 touchOrigin = -Vector2.one;
     private Vector2 touchFinal;
     private Vector2 distancia;
@@ -14,6 +14,7 @@ public class NinjaControl : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        shuriken = Resources.Load("shuriken");
         moveSpeed = 3f;
         jumpHigh = 10f;
     }
