@@ -59,6 +59,9 @@ public class NinjaControl : MonoBehaviour {
                     ;
                 }
             }
+        }else if (Input.GetButtonDown("Jump"))
+        {
+            transform.position += Vector3.up * jumpHigh * Time.deltaTime;
         }
 
     }
