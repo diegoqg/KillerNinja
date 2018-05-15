@@ -4,35 +4,44 @@ using UnityEngine;
 
 public class NinjaControl : MonoBehaviour {
 
-    public float moveSpeed { get; set; }
-    public float jumpHigh { get; set; }
+    public float moveSpeed;
+    public float jumpHigh;
     private Vector2 touchOrigin = -Vector2.one;
     private Vector2 touchFinal;
     private Vector2 distancia;
-    
+    private int vidas { get; set; }
+    private Animator anim;
 
     // Use this for initialization
-    void Start () {
-        moveSpeed = 3f;
-        jumpHigh = 10f;
+    void Start() {
+        vidas = 1;
+        anim = GetComponent<Animator>();
     }
-	
-	// Update is called once per frame
-	void Update () {
 
-        transform.position += Vector3.right * moveSpeed * Time.deltaTime;
+    // Update is called once per frame
+    void Update() {
 
-        // mayor que 0 si queremos contar mas de un dedo.
-        if (Input.touchCount > 0)
+        //transform.position += Vector3.right * moveSpeed * Time.deltaTime;
+
+        // si el personaje ha caido
+        if (transform.position.y < -15f)
         {
+            Component cameraScript = Camera.main.gameObject.GetComponent("CamFollow");
+            Destroy(cameraScript);
+            Destroy(gameObject);
+        }
             
+        // mayor que 0 si queremos contar mas de un dedo.
+        else if (Input.touchCount > 0)
+        {
+
             Touch touch = Input.touches[0];
 
-            if(touch.phase == TouchPhase.Began)
+            if (touch.phase == TouchPhase.Began)
             {
                 touchOrigin = touch.position;
 
-            }else if (touch.phase == TouchPhase.Ended && touchOrigin!=-Vector2.one)
+            } else if (touch.phase == TouchPhase.Ended && touchOrigin != -Vector2.one)
             {
                 touchFinal = touch.position;
                 distancia.x = touchFinal.x - touchOrigin.x;
@@ -51,11 +60,25 @@ public class NinjaControl : MonoBehaviour {
                 }
             }
         }
-
-        
+        if (Input.GetButtonDown("Jump"))
+        {
+            transform.position += Vector3.up * jumpHigh * Time.deltaTime;
+            anim.SetBool("salto", true);
+        }
     }
 
+    public void recibirDaño()
+    {
+        vidas--;
 
+        if(vidas == 0)
+        {
+            //ME MUEROOOO
+            Component cameraScript = Camera.main.gameObject.GetComponent("CamFollow");
+            Destroy(cameraScript);
+            Destroy(gameObject);
+        }
+    }
     //void OnMouseDown()
     //{
 
