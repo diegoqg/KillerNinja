@@ -9,19 +9,25 @@ public class NinjaControl : MonoBehaviour {
     private Vector2 touchOrigin = -Vector2.one;
     private Vector2 touchFinal;
     private Vector2 distancia;
+    private Vector3 changeColider = new Vector3(0,0.1f,0);
+    private float jumpTime;
+    private Animator anim;
+    private CapsuleCollider myCollider;
     private int vidas { get; set; }
+    private bool up = true;
 
     // Use this for initialization
     void Start() {
         vidas = 1;
-        moveSpeed = 3f;
-        jumpHigh = 10f;
+        anim = GetComponent<Animator>();
+        myCollider = GetComponent<CapsuleCollider>();
     }
 
     // Update is called once per frame
     void Update() {
 
         transform.position += Vector3.right * moveSpeed * Time.deltaTime;
+        //jumpTime -= Time.deltaTime;
 
         // si el personaje ha caido
         if (transform.position.y < -15f)
@@ -59,10 +65,32 @@ public class NinjaControl : MonoBehaviour {
                     ;
                 }
             }
-        }else if (Input.GetButtonDown("Jump"))
-        {
-            transform.position += Vector3.up * jumpHigh * Time.deltaTime;
         }
+
+        if (Input.GetButtonDown("Jump") && !anim.GetBool("Jump"))
+        {
+            anim.SetBool("Jump", true);
+            Debug.Log("EL JUMP ESTA PUESTO EN :" + anim.GetBool("Jump"));
+            
+        }
+
+        if (anim.GetBool("Jump"))
+        {
+            Debug.Log(myCollider.center + " SALTA " + up);
+
+            if (up) myCollider.center += changeColider;
+            else myCollider.center -= changeColider;
+
+            
+           if (myCollider.center.y < 0.7)
+            {
+                myCollider.center = new Vector3(0.0f, 0.7f, 0.0f);
+            }
+            GetComponent<Rigidbody>().useGravity = false;
+        }
+
+        if(anim.GetBool("Jump"))
+            jumpTime -= Time.deltaTime;
 
     }
 
@@ -88,12 +116,37 @@ public class NinjaControl : MonoBehaviour {
 
     //void OnMouseDrag()
     //{
-       
+
     //    Vector3 temp = Input.mousePosition;
-        
+
     //    //Debug.Log("mouse: ", temp.z);
     //    //temp.z = this.distancia;
     //    //this.transform.position = Camera.main.ScreenToWorldPoint(temp);
     //}
+
+    bool AnimatorIsPlaying()
+    {
+        return anim.GetCurrentAnimatorStateInfo(0).length >
+               anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+    }
+
+
+    void stopJump()
+    {
+        up = true;
+        anim.SetBool("Jump", false);
+        myCollider.center = new Vector3(0f, 0.7f, 0f);
+        GetComponent<Rigidbody>().useGravity = true;
+    }
+
+    void coliderUp()
+    {
+        up = true;
+    }
+
+    void coliderDown()
+    {
+        up = false;
+    }
 
 }

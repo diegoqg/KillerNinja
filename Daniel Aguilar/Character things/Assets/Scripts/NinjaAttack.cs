@@ -10,7 +10,8 @@ public class NinjaAttack : MonoBehaviour {
 
     private float timeToFire = 0f;
     private Transform firePoint;
-    
+    private Animator anim;
+
     // Use this for initialization
     void Start () {
         firePoint = transform;
@@ -19,13 +20,15 @@ public class NinjaAttack : MonoBehaviour {
             Debug.Log("no firepoint");
         }
         weapon = Resources.Load("shuriken");
+
+        anim = GetComponent<Animator>();
     }
 	
 	// Update is called once per frame
 	void Update () {
 
         //shoot();
-        if (Time.time > timeToFire)
+        if (Time.time > timeToFire && !anim.GetBool("Jump"))
         {
             if (Input.GetButtonDown("Fire1"))
             {
@@ -40,7 +43,7 @@ public class NinjaAttack : MonoBehaviour {
                 if (bulletInstance != null)
                     bulletInstance.GetComponent<Rigidbody>().velocity = new Vector2(shootDirection.x * 5f, shootDirection.y * 5f);*/
                 timeToFire = Time.time + 1 / fireRate;
-                Instantiate(weapon, transform.position + new Vector3(1.5f, 0.0f, 0.0f), transform.rotation);
+                Instantiate(weapon, transform.position + new Vector3(1f, 1f, 0f), transform.rotation);
                 
             }
         }
