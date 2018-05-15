@@ -10,18 +10,18 @@ public class NinjaControl : MonoBehaviour {
     private Vector2 touchFinal;
     private Vector2 distancia;
     private int vidas { get; set; }
+    private Animator anim;
 
     // Use this for initialization
     void Start() {
         vidas = 1;
-        moveSpeed = 3f;
-        jumpHigh = 10f;
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update() {
 
-        transform.position += Vector3.right * moveSpeed * Time.deltaTime;
+        //transform.position += Vector3.right * moveSpeed * Time.deltaTime;
 
         // si el personaje ha caido
         if (transform.position.y < -15f)
@@ -60,7 +60,11 @@ public class NinjaControl : MonoBehaviour {
                 }
             }
         }
-
+        if (Input.GetButtonDown("Jump"))
+        {
+            transform.position += Vector3.up * jumpHigh * Time.deltaTime;
+            anim.SetBool("salto", true);
+        }
     }
 
     public void recibirDaño()
