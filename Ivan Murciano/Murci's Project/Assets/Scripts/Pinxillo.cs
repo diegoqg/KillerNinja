@@ -9,7 +9,7 @@ public class Pinxillo : MonoBehaviour , Enemy{
     bool HePegado;
     public float MinDistancia = 2.0f;
     GameObject GoPlayer;
-    public float freq = 0.2f;    
+    public float freq = 1.0f;    
     private Animator anim;
     private CharacterController controller;
     private bool battle_state;
@@ -31,7 +31,6 @@ public class Pinxillo : MonoBehaviour , Enemy{
 		battle_state = true;
         anim.SetInteger("moving", 3);
         GoPlayer.GetComponent<NinjaMove>().RecibirDaño();
-        // IdleAtack();
     }
 
     public void IdleAtack()
@@ -54,7 +53,7 @@ public class Pinxillo : MonoBehaviour , Enemy{
 	
 	// Update is called once per frame
 	void Update () {
-        // Debug.Log("ESTAMOS A :" + Vector3.Distance(transform.position, Ninja.position));
+        //Debug.Log("ESTAMOS A :" + Vector3.Distance(transform.position, TfPlayer.position));
         //Primero miramos que el duende esta delante del ninja para pegar
         if (this.transform.position.x >= TfPlayer.position.x)
         {   

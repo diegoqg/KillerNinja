@@ -20,8 +20,8 @@ public class NinjaMove : MonoBehaviour {
 	void Update () {
         float moveHorizontal = Input.GetAxis("Horizontal") * Time.deltaTime * 5.0f;
         float moveVertical = Input.GetAxis("Vertical") * Time.deltaTime * 5.0f;
-
-        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+        moveHorizontal = moveHorizontal * -1;
+        Vector3 movement = new Vector3(0.0f, moveHorizontal, 0.0f);
 
         transform.Translate(movement);
 
