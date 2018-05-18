@@ -15,12 +15,15 @@ public class NinjaControl : MonoBehaviour {
     private CapsuleCollider myCollider;
     private int vidas { get; set; }
     private bool up = true;
+    private bool slide = true;
+    private float speed;
 
     // Use this for initialization
     void Start() {
         vidas = 1;
         anim = GetComponent<Animator>();
         myCollider = GetComponent<CapsuleCollider>();
+        speed = moveSpeed;
     }
 
     // Update is called once per frame
@@ -70,8 +73,56 @@ public class NinjaControl : MonoBehaviour {
         if (Input.GetButtonDown("Jump") && !anim.GetBool("Jump"))
         {
             anim.SetBool("Jump", true);
-            Debug.Log("EL JUMP ESTA PUESTO EN :" + anim.GetBool("Jump"));
-            
+            myCollider.center = new Vector3(0f, 0.7f, 0f);
+            myCollider.height = 1.5f;
+            //Debug.Log("EL JUMP ESTA PUESTO EN :" + anim.GetBool("Jump"));
+
+        }
+
+        if (Input.GetButtonDown("Fire3") && !anim.GetBool("Slide"))
+        {
+            anim.SetBool("Slide", true);
+            slide = true;
+            myCollider.center = new Vector3(0f, 0.7f, 0f);
+            myCollider.height = 1.5f;
+            myCollider.center += changeColider*2;
+            Debug.Log("ME AGACHO" );
+
+
+        }
+
+        if (anim.GetBool("Slide"))
+        {
+            if (slide)
+            {
+                myCollider.center += changeColider*0.75f;
+                myCollider.height -= 0.1f;
+                transform.position -= new Vector3(0,0.05f,0);
+            }
+            else
+            {
+                myCollider.center -= changeColider*0.45f;
+                //myCollider.height += 0.1f;
+                transform.position += new Vector3(0, 0.05f, 0);
+            }
+            if (myCollider.center.y > 0.7f)
+            {
+                myCollider.center = new Vector3(0.0f, 0.7f, 0.0f);
+            }
+
+            if (myCollider.center.y < 0.3f)
+            {
+                myCollider.center = new Vector3(0.0f, 0.3f, 0.0f);
+            }
+            if(myCollider.height < 0.5f)
+            {
+                myCollider.height = 0.5f;
+            }
+            if (myCollider.height > 1.25f)
+            {
+                myCollider.height = 1.25f;
+            }
+
         }
 
         if (anim.GetBool("Jump"))
@@ -136,17 +187,31 @@ public class NinjaControl : MonoBehaviour {
         up = true;
         anim.SetBool("Jump", false);
         myCollider.center = new Vector3(0f, 0.7f, 0f);
+        myCollider.height = 1.5f;
         GetComponent<Rigidbody>().useGravity = true;
+    }
+
+    void stopSlide()
+    {
+        slide = true;
+        anim.SetBool("Slide", false);
+        myCollider.center = new Vector3(0f, 0.7f, 0f);
+        myCollider.height = 1.5f;
+        moveSpeed = speed;
+        //myCollider.center = new Vector3(0f, 0.7f, 0f);
+        //GetComponent<Rigidbody>().useGravity = true;
     }
 
     void coliderUp()
     {
         up = true;
+        slide = false;
     }
 
     void coliderDown()
     {
         up = false;
+        slide = true;
     }
 
 }
